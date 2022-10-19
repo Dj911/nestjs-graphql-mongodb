@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AllUserDetailsDto {
+  data: [UserResponseDto!]
+  message: String!
+  status: String!
+}
+
+type CreateUserDto {
+  data: UserResponseDto
+  message: String!
+  status: String!
+}
+
+type MessagesDto {
+  message: String!
+  userId: String!
+}
+
+type Mutation {
+  createUser(input: UserRegisterInput!): CreateUserDto!
+  sendMessage(message: String!, userId: ID!): MessagesDto!
+  updateRole(permission: [String!], roleId: String!, roleName: String): RolesResponseDto!
+  updateUser(_id: ID!, payload: UserRegisterInput): CreateUserDto!
+}
+
+type Query {
+  getAllUsers: AllUserDetailsDto!
+  getUserById(_id: ID!, email: String): CreateUserDto!
+}
+
+type RolesResponseDto {
+  _id: ID!
+  permission: [String!]!
+  roleName: String!
+}
+
+type Subscription {
+  getChat(userId: String!): MessagesDto!
+  getUserPermissionsSub(roleId: String!): UserPermissionsSub!
+}
+
+type UserPermissionsSub {
+  data: RolesResponseDto!
+  id: ID!
+}
+
+input UserRegisterInput {
+  countryCode: Float
+  email: String!
+  mobileNumber: Float
+  name: String
+  role: ID!
+}
+
+type UserResponseDto {
+  _id: ID!
+  countryCode: Float
+  email: String!
+  mobileNumber: Float!
+  name: String!
+  role: RolesResponseDto!
+}
